@@ -1,5 +1,7 @@
-const { VueLoaderPlugin } = require('vue-loader')
-const path = require('path')
+const { VueLoaderPlugin } = require('vue-loader');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const path = require('path');
 
 module.exports = {
   //mode: 'development',
@@ -8,6 +10,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
+    filename: 'app.bundle.js',
   },
   devServer: {
     contentBase: './dist',
@@ -38,7 +41,11 @@ module.exports = {
     ]
   },
   plugins: [
-    new VueLoaderPlugin
+    new VueLoaderPlugin,
+    new CleanWebpackPlugin,
+    new HtmlWebpackPlugin({
+      template: 'public/index.html'
+    })
   ],
   resolve: {
     alias: {
